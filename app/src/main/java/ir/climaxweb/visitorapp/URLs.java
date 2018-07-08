@@ -7,5 +7,7 @@ public class URLs {
 
     public static final String URL_REGISTER = ROOT_URL + "signup/";
     public static final String URL_LOGIN= ROOT_URL + "login/?";
-
+    public static final String URL_AGENTS=ROOT_URL+"getvisitoragents/?";
+    public static final String URL_PRODUCTS=ROOT_URL+"getproducts";
+    public static final String URL_ORDER=ROOT_URL+"submitorder/?";
 }

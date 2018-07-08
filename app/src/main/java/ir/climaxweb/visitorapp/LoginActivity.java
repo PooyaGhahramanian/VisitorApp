@@ -36,9 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 userLogin();
             }
         });
-
     }
-
     private void userLogin() {
         //first getting the values
         final String username = editTextUsername.getText().toString();

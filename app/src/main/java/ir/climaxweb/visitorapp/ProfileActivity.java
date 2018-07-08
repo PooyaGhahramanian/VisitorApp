@@ -43,5 +43,11 @@ public class ProfileActivity extends AppCompatActivity {
                 SharedPrefManager.getInstance(getApplicationContext()).logout();
             }
         });
+        findViewById(R.id.buttonOrder).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),OrderActivity.class));
+            }
+        });
     }
 }

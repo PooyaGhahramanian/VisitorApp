@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.simplifiedlearning.simplifiedcoding.ProfileActivity">
+    tools:context="ir.climaxweb.visitorapp.ProfileActivity">
 
 
     <LinearLayout
@@ -65,11 +65,18 @@
 
 
         </TableLayout>
-
+        <Button
+            android:id="@+id/buttonOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Take Order" />
         <Button
             android:id="@+id/buttonLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logout" />
+
     </LinearLayout>
+
+
 </RelativeLayout>

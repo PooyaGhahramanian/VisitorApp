@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         findViewById(R.id.buttonOrder).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),OrderActivity.class));
+                startActivity(new Intent(getApplicationContext(),AgentActivity.class));
             }
         });
     }

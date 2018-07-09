@@ -39,6 +39,8 @@ public class ProductActivity extends AppCompatActivity implements NumberPicker.O
     ArrayList<Integer> sProductsId;
     int sNum;
     ArrayList<Integer> sNums;
+    String sProductsId_param;
+    String sNums_param;
 
     private RecyclerView recyclerView;
     private ProductAdapter pAdapter;
@@ -47,8 +49,8 @@ public class ProductActivity extends AppCompatActivity implements NumberPicker.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
-        sProductsId.clear();
-        sNums.clear();
+        sProductsId=new ArrayList<>();
+        sNums=new ArrayList<>();
 
         Intent intentExtras=getIntent();
         Bundle bundleExtras=intentExtras.getExtras();
@@ -56,7 +58,32 @@ public class ProductActivity extends AppCompatActivity implements NumberPicker.O
             agentId=bundleExtras.getInt("agentId");
             Log.d("pooya, Selected Agent Id: ",Integer.toString(agentId));
         }
+        Button btnSubmitOrder=(Button)findViewById(R.id.btnSubmitOrder);
+        btnSubmitOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sProductsId.size()>0){
+                    sProductsId_param=convertToParamFormat(sProductsId);
+                    sNums_param=convertToParamFormat(sNums);
+                    submitOrder sOrder=new submitOrder();
+                    sOrder.execute();
+                    //startActivity(new Intent(ProductActivity.this,ProfileActivity.class));
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "no products selected to order !", Toast.LENGTH_SHORT).show();
+                }
 
+            }
+        });
+        Button btnCancelOrder=(Button)findViewById(R.id.btnCancelOrder);
+        btnCancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(ProductActivity.this,ProfileActivity.class));
+
+            }
+        });
         //AlertDialog
 
 
@@ -85,6 +112,19 @@ public class ProductActivity extends AppCompatActivity implements NumberPicker.O
         }));
 
         prepareProductData();
+    }
+    private String convertToParamFormat(ArrayList<Integer> arr){
+        String out="";
+        for(int i=0;i<arr.size();i++){
+            if(i==0){
+                Integer.toString(arr.get(i));
+            }
+            else{
+
+            }
+            out=out+","+Integer.toString(arr.get(i));
+        }
+        return out;
     }
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -203,6 +243,56 @@ public class ProductActivity extends AppCompatActivity implements NumberPicker.O
             //returing the response
 
             return requestHandler.sendPostRequest(URLs.URL_PRODUCTS, params);
+            //return requestHandler.sendPostRequest("http://se.climaxweb.ir/api/login/?username="+username+"&password="+password);
+        }
+    }
+    class submitOrder extends AsyncTask<Void, Void, String> {
+
+        ProgressBar progressBar;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar = (ProgressBar) findViewById(R.id.ProductProgressBar);
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressBar.setVisibility(View.GONE);
+
+            try {
+                if (s == "") {
+                    Toast.makeText(getApplicationContext(), "empty order !", Toast.LENGTH_SHORT).show();
+                } else {
+                    JSONObject obj=new JSONObject(s);
+                    Toast.makeText(getApplicationContext(), "Order successfully submitted !", Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+            int user_id = user.getId();
+            //creating request handler object
+            RequestHandler requestHandler = new RequestHandler();
+
+            //creating request parameters
+            HashMap<String, String> params = new HashMap<>();
+            params.put("visitor_id", Integer.toString(user_id));
+            params.put("agent_id", Integer.toString(agentId));
+            params.put("products_id", sProductsId_param);
+            params.put("products_count", sNums_param);
+            //returing the response
+
+            return requestHandler.sendPostRequest(URLs.URL_ORDER, params);
             //return requestHandler.sendPostRequest("http://se.climaxweb.ir/api/login/?username="+username+"&password="+password);
         }
     }

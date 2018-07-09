@@ -8,6 +8,7 @@ public class Agent
         private String Address;
         private Double lat;
         private Double lng;
+        private String Info;
 
         public Agent(int id, String Name, String Address, Double lat, Double lng) {
             this.id = id;

@@ -55,5 +55,12 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(ProfileActivity.this,MapsActivity.class));
             }
         });
+        findViewById(R.id.buttonVisit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this,VisitActivity.class));
+
+            }
+        });
     }
 }

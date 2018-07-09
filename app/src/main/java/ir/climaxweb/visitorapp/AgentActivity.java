@@ -45,7 +45,11 @@ public class AgentActivity extends AppCompatActivity {
             public void onClick(View view, int position) {
                 Agent agent = agentList.get(position);
                 Toast.makeText(getApplicationContext(), agent.getName() + " is selected!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(),ProductActivity.class));
+                Intent intentBundle=new Intent(AgentActivity.this,ProductActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt("agentId",agent.getId());
+                intentBundle.putExtras(bundle);
+                startActivity(intentBundle);
             }
 
             @Override

@@ -3,6 +3,7 @@ package ir.climaxweb.visitorapp;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -33,12 +34,28 @@ public class ProductActivity extends AppCompatActivity implements NumberPicker.O
 
     ArrayList<Product> productList=new ArrayList<>();
     Product p;
+    int agentId;
+    int sProductId;
+    ArrayList<Integer> sProductsId;
+    int sNum;
+    ArrayList<Integer> sNums;
+
     private RecyclerView recyclerView;
     private ProductAdapter pAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+        sProductsId.clear();
+        sNums.clear();
+
+        Intent intentExtras=getIntent();
+        Bundle bundleExtras=intentExtras.getExtras();
+        if(!bundleExtras.isEmpty()){
+            agentId=bundleExtras.getInt("agentId");
+            Log.d("pooya, Selected Agent Id: ",Integer.toString(agentId));
+        }
 
         //AlertDialog
 
@@ -56,6 +73,7 @@ public class ProductActivity extends AppCompatActivity implements NumberPicker.O
             @Override
             public void onClick(View view, int position) {
                 Product product = productList.get(position);
+                sProductId=product.getId();
                 Toast.makeText(getApplicationContext(), product.getName() + " is selected!", Toast.LENGTH_SHORT).show();
                 showNpDialog();
             }
@@ -93,6 +111,9 @@ public class ProductActivity extends AppCompatActivity implements NumberPicker.O
             @Override
             public void onClick(View v) {
 
+                sNum=np.getValue();
+                sProductsId.add(sProductId);
+                sNums.add(sNum);
                 d.dismiss();
             }
         });

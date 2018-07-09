@@ -1,0 +1,51 @@
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:weightSum="100"
+    android:layout_height="match_parent"
+    tools:context="ir.climaxweb.visitorapp.MapsActivity"
+    android:orientation="vertical">
+
+    <fragment
+
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_weight="95"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </fragment>
+
+    <LinearLayout
+
+        android:layout_weight="5"
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+
+            android:id="@+id/btnPathReq"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:text="best path"
+            android:layout_height="match_parent" >
+
+        </Button>
+
+        <Button
+
+            android:id="@+id/btnAgentReq"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:text="find agents"
+            android:layout_height="match_parent" >
+
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>

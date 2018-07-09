@@ -33,6 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:textColor="@color/Address"
-        android:layout_below="@id/agentName" />/>
+        android:layout_below="@id/agentName" />
 
 </RelativeLayout>

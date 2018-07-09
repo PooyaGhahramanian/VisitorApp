@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".OrderActivity" />
-        <activity android:name=".AgentActivity"></activity>
+        <activity android:name=".AgentActivity" />
+        <activity android:name=".ProductActivity"></activity>
     </application>
 
 </manifest>

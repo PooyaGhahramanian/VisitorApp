@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -48,9 +47,6 @@ public class MapsActivity extends RuntimePermissionsActivity implements OnMapRea
     private ArrayList<LatLng> latLngsha = new ArrayList<>();
     private ArrayList<RouteInfo> routeInfos = new ArrayList<>();
     private  Polyline mypolyline ;
-    private LocationManager locationManager;
-    LatLng tehran = new LatLng(35.720775, 51.415228);
-
 
     Agent a;
     private List<Agent> agentList = new ArrayList<>();
@@ -71,6 +67,7 @@ public class MapsActivity extends RuntimePermissionsActivity implements OnMapRea
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        LatLng tehran = new LatLng(35.720775, 51.415228);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tehran, 13), 3000, null );
@@ -98,18 +95,14 @@ public class MapsActivity extends RuntimePermissionsActivity implements OnMapRea
                 return;
             }
             mMap.setMyLocationEnabled(true);
-
-//mreza
-              locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-              Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-              getmyLocation(location);
-//mreza
-
+//        try {
+//            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+//            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            getmyLocation(location);
        Agreq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 agentList=new ArrayList<Agent>();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tehran, 11), 3000, null );
                 getAgents getA=new getAgents();
                 getA.execute();
 
@@ -207,7 +200,7 @@ public class MapsActivity extends RuntimePermissionsActivity implements OnMapRea
     }
     public ArrayList getAgentLocation()
     {
-        latLngsha.add(mylatlang);
+
         for(int i=0; i<agentList.size(); i++){
 
             a=agentList.get(i);
@@ -252,7 +245,7 @@ public class MapsActivity extends RuntimePermissionsActivity implements OnMapRea
     public void getmyLocation(Location location)
     {
 
-        mylatlang = new LatLng(location.getLatitude(),location.getLongitude());
+        mylatlang = new LatLng(location.getLongitude(),location.getAltitude());
 
     }
 

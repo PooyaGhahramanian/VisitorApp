@@ -4,6 +4,7 @@
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -22,8 +23,11 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".OrderActivity" />
         <activity android:name=".AgentActivity" />
-        <activity android:name=".ProductActivity" />
-        <activity android:name=".VisitActivity"></activity>
+        <activity android:name=".ProductActivity"/>
+        <activity android:name=".MapsActivity" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>

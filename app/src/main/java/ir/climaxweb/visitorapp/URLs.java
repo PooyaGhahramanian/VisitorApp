@@ -10,4 +10,5 @@ public class URLs {
     public static final String URL_AGENTS=ROOT_URL+"getvisitoragents/?";
     public static final String URL_PRODUCTS=ROOT_URL+"getproducts";
     public static final String URL_ORDER=ROOT_URL+"submitorder/?";
+    public static final String URL_VISIT=ROOT_URL+"SubmitVisit/?";
 }

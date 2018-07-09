@@ -70,7 +70,7 @@ public class VisitActivity extends AppCompatActivity {
         agent = new Agent(3, "Hossein", "Sazman Ab, Tehran, Iran", 4.002, 12.003);
         agentList.add(agent);
         */
-        AgentActivity.getAgents getA = new VisitActivity().getAgents();
+        getAgents getA = new getAgents();
         getA.execute();
 
         aAdapter.notifyDataSetChanged();

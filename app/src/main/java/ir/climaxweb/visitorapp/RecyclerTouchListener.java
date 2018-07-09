@@ -1,7 +1,10 @@
 package ir.climaxweb.visitorapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,9 +34,9 @@ public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
 
-        View child = rv.findChildViewUnder(e.getX(), e.getY());
-        if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-            clickListener.onClick(child, rv.getChildPosition(child));
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildPosition(child));
         }
         return false;
     }

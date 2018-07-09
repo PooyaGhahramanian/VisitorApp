@@ -1,14 +1,24 @@
 package ir.climaxweb.visitorapp;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.NumberPicker;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -19,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ProductActivity extends AppCompatActivity{
+public class ProductActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
 
     ArrayList<Product> productList=new ArrayList<>();
     Product p;
@@ -29,6 +39,11 @@ public class ProductActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+        //AlertDialog
+
+
+        //AlertDialog
 
         recyclerView = (RecyclerView) findViewById(R.id.productRecyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -42,6 +57,7 @@ public class ProductActivity extends AppCompatActivity{
             public void onClick(View view, int position) {
                 Product product = productList.get(position);
                 Toast.makeText(getApplicationContext(), product.getName() + " is selected!", Toast.LENGTH_SHORT).show();
+                showNpDialog();
             }
 
             @Override
@@ -51,6 +67,45 @@ public class ProductActivity extends AppCompatActivity{
         }));
 
         prepareProductData();
+    }
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+
+        Log.i("value is",""+newVal);
+
+    }
+
+    public void showNpDialog()
+    {
+
+        final Dialog d = new Dialog(ProductActivity.this);
+        d.setTitle("Select number of this product");
+        d.setContentView(R.layout.dialog);
+        Button b1 = (Button) d.findViewById(R.id.button1);
+        Button b2 = (Button) d.findViewById(R.id.button2);
+        final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+        np.setMaxValue(100); // max value 100
+        np.setMinValue(1);   // min value 0
+        np.setWrapSelectorWheel(false);
+        np.setOnValueChangedListener(this);
+        b1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+
+                d.dismiss();
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                d.dismiss(); // dismiss the dialog
+            }
+        });
+        d.show();
+
+
     }
     private void prepareProductData() {
 

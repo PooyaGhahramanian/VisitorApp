@@ -121,7 +121,6 @@ public class VisitActivity extends AppCompatActivity {
             }
 
         }
-
         @Override
         protected String doInBackground(Void... voids) {
 

@@ -71,10 +71,16 @@
             android:layout_height="wrap_content"
             android:text="Take Order" />
         <Button
+        android:id="@+id/buttonSubmitVisit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit Visit" />
+        <Button
             android:id="@+id/buttonLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logout" />
+
 
     </LinearLayout>
 

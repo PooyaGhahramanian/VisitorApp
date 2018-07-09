@@ -81,9 +81,9 @@ public class VisitActivity extends AppCompatActivity implements LocationListener
                         ProgressBar progressBar;
                         progressBar = (ProgressBar) findViewById(R.id.AgentsProgressBar);
                         progressBar.setVisibility(View.VISIBLE);
-                       SubmitVisit submitVisit=new SubmitVisit();
+                        SubmitVisit submitVisit=new SubmitVisit();
                         submitVisit.execute();
-                     progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
             }
@@ -136,11 +136,11 @@ public class VisitActivity extends AppCompatActivity implements LocationListener
 
             try {
                 JSONArray arr = new JSONArray(s);
-                    for (int i = 0; i < arr.length(); i++) {
-                        JSONObject obj = arr.getJSONObject(i);
-                        isSubmited=obj.getString("message");
-                        Toast.makeText(getApplicationContext(), isSubmited, Toast.LENGTH_LONG).show();
-                    }
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject obj = arr.getJSONObject(i);
+                    isSubmited=obj.getString("message");
+                    Toast.makeText(getApplicationContext(), isSubmited, Toast.LENGTH_LONG).show();
+                }
 
 
 
@@ -174,7 +174,7 @@ public class VisitActivity extends AppCompatActivity implements LocationListener
     private final LocationListener mLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(final Location location) {
-           LastLocation=location;
+            LastLocation=location;
         }
 
         @Override
